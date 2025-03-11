@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chefs.pe - Juego de Cocina Peruana</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chefs.pe</h1>
+            <h2>¿Sabes qué ingredientes lleva cada plato?</h2>
+        </header>
+
+        <div class="game-container">
+            <div class="game-info">
+                <div class="score-container">
+                    <p>Puntuación: <span id="score">0</span></p>
+                </div>
+                <div class="dish-container">
+                    <h3>Prepara: <span id="current-dish">Cargando...</span></h3>
+                    <div id="dish-image-container">
+                        <img id="dish-image" src="" alt="Plato peruano">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ingredients-container">
+                <h3>Selecciona los ingredientes correctos:</h3>
+                <div id="ingredients-grid"></div>
+                <button id="check-button" class="btn">Verificar ingredientes</button>
+                <button id="next-button" class="btn" style="display: none;">Siguiente plato</button>
+            </div>
+
+            <div id="result-message" class="result-message"></div>
+        </div>
+
+        <div id="game-over" class="game-over" style="display: none;">
+            <h2>¡Juego terminado!</h2>
+            <p>Tu puntuación final: <span id="final-score">0</span></p>
+            <button id="restart-button" class="btn">Jugar de nuevo</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
