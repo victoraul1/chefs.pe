@@ -172,7 +172,7 @@ function getRandomAdditionalIngredients(currentDishIngredients, count) {
 }
 
 // Función para obtener todos los ingredientes para un plato (correctos + adicionales)
-function getIngredientsForGame(dishId, totalIngredients = 15) {
+function getIngredientsForGame(dishId, totalIngredients = 20) {
     const dish = dishes.find(d => d.id === dishId);
     if (!dish) return [];
     
