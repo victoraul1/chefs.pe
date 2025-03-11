@@ -61,6 +61,33 @@ h2 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+.timer-container {
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-left: 10px;
+}
+
+.timer-container.warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.timer-container.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
 .dish-container {
     text-align: center;
     flex-grow: 1;

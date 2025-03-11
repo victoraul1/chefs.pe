@@ -4,6 +4,8 @@ let selectedIngredients = [];
 let score = 0;
 let playedDishes = [];
 const TOTAL_DISHES = 5; // Número de platos a jugar en una partida
+let timerInterval = null;
+let timeLeft = 60; // 1 minuto en segundos
 
 // Elementos del DOM
 const scoreElement = document.getElementById('score');
@@ -16,16 +18,64 @@ const resultMessageElement = document.getElementById('result-message');
 const gameOverElement = document.getElementById('game-over');
 const finalScoreElement = document.getElementById('final-score');
 const restartButton = document.getElementById('restart-button');
+const timerElement = document.getElementById('timer');
+const timerContainer = document.querySelector('.timer-container');
 
 // Inicializar el juego
 function initGame() {
     score = 0;
     playedDishes = [];
     updateScore();
+    resetTimer();
+    startTimer();
     loadNextDish();
     
     // Ocultar pantalla de fin de juego si está visible
     gameOverElement.style.display = 'none';
+}
+
+// Función para formatear el tiempo en formato MM:SS
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+}
+
+// Iniciar el temporizador
+function startTimer() {
+    // Limpiar cualquier intervalo existente
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+    
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        
+        // Actualizar el elemento del temporizador
+        timerElement.textContent = formatTime(timeLeft);
+        
+        // Cambiar el estilo según el tiempo restante
+        if (timeLeft <= 10) {
+            timerContainer.className = 'timer-container danger';
+        } else if (timeLeft <= 20) {
+            timerContainer.className = 'timer-container warning';
+        } else {
+            timerContainer.className = 'timer-container';
+        }
+        
+        // Si el tiempo se acaba, terminar el juego
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endGame();
+        }
+    }, 1000);
+}
+
+// Reiniciar el temporizador
+function resetTimer() {
+    timeLeft = 60; // 1 minuto
+    timerElement.textContent = formatTime(timeLeft);
+    timerContainer.className = 'timer-container';
 }
 
 // Cargar el siguiente plato
@@ -232,6 +282,11 @@ function updateScore() {
 
 // Finalizar el juego
 function endGame() {
+    // Detener el temporizador
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+    
     // Mostrar pantalla de fin de juego
     gameOverElement.style.display = 'block';
     finalScoreElement.textContent = score;
